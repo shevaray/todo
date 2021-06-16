@@ -1,0 +1,23 @@
+<div class="container">    
+    <div class="row no-gutters">
+        <div class="col col-lg-10 offset-lg-1">
+            
+
+            <div class="container">
+                <div class="jumbotron">
+                    <form>
+                        <div class="form-group">
+                            <input type="number" class="form-control"  [(ngModel)]="newTodo.quantity" name="quantity" placeholder="Input Your Item quantity"/>
+                            <input type="text" class="form-control" [(ngModel)]="newTodo.label" name="label" id="label" placeholder="Input your label here" />
+                            <button type="button" class="btn btn-success" (click)="updateTodo(newTodo)" >Save</button>
+                            <button type="button" class="btn btn-danger" (click)="cancelTodo(newTodo)" >Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+        </div>
+
+    </div>
+</div>
+

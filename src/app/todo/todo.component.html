@@ -1,0 +1,71 @@
+<div class="container">    
+    <div class="row no-gutters">
+        <div class="col col-lg-10 offset-lg-1">
+
+            <div class="container">
+            <h1 class="text-center"><span class="label label-default">{{title}}</span></h1>
+            </div>
+
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <input type="number" class="form-control"  [(ngModel)]="newTodo.quantity" name="quantity" placeholder="Input Your Item quantity"/>
+                        <input type="text" class="form-control" [(ngModel)]="newTodo.label" name="label" id="label" placeholder="Input your label here" />
+                        <button type="button" class="btn btn-success" (click)="addTodo(newTodo)" >Add Todo</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" (change)="onBulkSelect($event)" [checked]="bulkSelect" >
+                                <button type="button" class="btn btn-danger" (click)="multipleDelete()" *ngIf="isChecked == true"><span class="glyphicon glyphicon-trash"></span></button>
+                            </th>
+                            <th>Todo List</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tbody">
+                        <tr *ngFor="let todo of todos">
+                            <td><input type="checkbox" name="isChecked" [checked]="bulkSelect" (change)="onCheck($event,todo)"></td>
+
+                            <td>
+                                <p *ngIf="todo.isEdit == false" id="label">{{todo.label}}</p>
+                                <input type="text" *ngIf="todo.isEdit == true" [(ngModel)]="todo.label" name="label" >
+                            </td>
+
+                            <td>
+                                <p *ngIf="todo.isEdit == false">{{todo.quantity}}</p>
+                                <input type="number" *ngIf="todo.isEdit == true" [(ngModel)]="todo.quantity" name="quantity" id="quantity" style="width: fit-content, 8ex;">
+                            </td>
+
+                            <td>
+                                <!-- <button class="btn btn-primary" (click)= "editTodo(todo)" *ngIf="todo.isEdit == false"  >edit</button> -->
+                                <!-- <a class="btn btn-primary" routerLink="edit/{{todo.id}}" *ngIf="todo.isEdit == false"  >edit</a> -->
+                                <a class="btn btn-primary" routerLink="edit/{{todo.id}}" >edit</a>
+                                <button class="btn btn-secondary" (click)= "cancelTodo(todo)" *ngIf="todo.isEdit == true" ><span class="glyphicon glyphicon-remove"></span></button>
+                                <button type="button" class="btn btn-success"  (click)="updateTodo(todo)" *ngIf="todo.isEdit == true" ><span class="glyphicon glyphicon-ok"></span></button>
+                                <button class="btn btn-danger" (click)="deleteTodo(todo)"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                   
+                </table>
+
+                <button class="btn btn-warning" (click)="exportCsv()">Export</button>
+                <input type="file"(change)="fileChangeListener($event)" class="form-control" id="file" name="file" accept=".csv">
+                <button class="btn btn-primary" type="submit" (click)="importCsv()">Import</button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
